@@ -83,3 +83,28 @@ getServices() async {
     return services;
   });
 }
+
+getBookingStatus(var serviceId, var clientId) async {
+  // http get request from url
+  var url = endpointDomain + 'service/$serviceId/$clientId/status';
+  var token;
+  await getToken().then((value) {
+    token = value;
+  });
+  return http.get(Uri.parse(url), headers: {
+    'Authorization': 'Token ' + token,
+  }).then((value) {
+    var responseJson = json.decode(value.body);
+    return responseJson;
+  });
+}
+
+bookService(var serviceId) async {
+  // http get request from url
+  var url = endpointDomain + 'service/$serviceId/selectService';
+  return await getToken().then((token) async {
+    return await http.post(Uri.parse(url), headers: {
+      'Authorization': 'Token ' + token,
+    });
+  });
+}
