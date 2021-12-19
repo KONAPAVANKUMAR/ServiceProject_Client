@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var token;
   var services;
+  var servicesBackup;
   var isServicesLoading = true;
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     getServices().then((services) {
       setState(() {
         this.services = services;
+        servicesBackup = services;
         isServicesLoading = false;
       });
     });
@@ -70,39 +72,74 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(20),
                 child: Center(
                   child: isServicesLoading
-                      ? Column()
-                      : Container(
-                          child: new ListView.builder(
-                              itemCount: services.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  child: ListTile(
-                                    title: Text(
-                                      services[index]['name'],
-                                      style: GoogleFonts.montserrat(
-                                        color: Colors.blue,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      services[index]['feasiblelocations'],
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    trailing: Icon(Icons.arrow_forward_ios),
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ServiceDetailPage(
-                                                      service:
-                                                          services[index])));
-                                    },
-                                  ),
-                                );
-                              }),
+                      ? Center(child: CircularProgressIndicator())
+                      : Column(
+                          children: [
+                            TextField(
+                              onChanged: (value) {
+                                setState(() {
+                                  services = [];
+                                });
+                                for (var service in servicesBackup) {
+                                  if (service['name']
+                                      .toLowerCase()
+                                      .contains(value.toLowerCase())) {
+                                    setState(() {
+                                      services.add(service);
+                                    });
+                                  }
+                                }
+                              },
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.search),
+                              ),
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              child: Expanded(
+                                child: new ListView.builder(
+                                    itemCount: services.length,
+                                    itemBuilder: (context, index) {
+                                      return Card(
+                                        child: ListTile(
+                                          title: Text(
+                                            services[index]['name'],
+                                            style: GoogleFonts.montserrat(
+                                              color: Colors.blue,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          subtitle: Text(
+                                            services[index]
+                                                ['feasiblelocations'],
+                                            style: GoogleFonts.montserrat(
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          trailing:
+                                              Icon(Icons.arrow_forward_ios),
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ServiceDetailPage(
+                                                            service: services[
+                                                                index])));
+                                          },
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ],
                         ),
                 ))));
   }

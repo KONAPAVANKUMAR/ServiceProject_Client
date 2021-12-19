@@ -1,3 +1,4 @@
+import 'package:clientapp/Paymentpage/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -69,8 +70,11 @@ class _bookingButtonState extends State<bookingButton> {
               });
             }
           });
-          // navigate to serviceDetail
 
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PaymentPage(title: 'Payment')));
         }
       },
       style: TextButton.styleFrom(backgroundColor: buttonColor),
