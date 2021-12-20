@@ -76,7 +76,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 20,
-                            color: Colors.blue,
+                            color: Colors.deepPurple,
                           ),
                         ),
                       ),
@@ -95,7 +95,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 20,
-                            color: Colors.blue,
+                            color: Colors.deepPurple,
                           ),
                         ),
                       ),
@@ -114,7 +114,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 20,
-                            color: Colors.blue,
+                            color: Colors.deepPurple,
                           ),
                         ),
                       ),
@@ -133,7 +133,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 20,
-                            color: Colors.blue,
+                            color: Colors.deepPurple,
                           ),
                         ),
                       ),

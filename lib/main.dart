@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Service Provider',
+      title: 'Client',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       home: MyHomePage(title: 'Client'),
     );
@@ -60,75 +60,95 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Center(
           child: Container(
+            color: Colors.white,
             padding: EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextField(
-                        controller: usernameController,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          hintText: 'Username',
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.deepPurple,
+                  ),
+                  padding: EdgeInsets.all(15),
+                  // border radius
+
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
                         ),
-                        style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                            fontSize: 20,
+                        child: TextField(
+                          controller: usernameController,
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Username',
+                          ),
+                          style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextField(
-                        controller: passwordController,
-                        obscureText: true,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
                         ),
-                        style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                            fontSize: 20,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          controller: passwordController,
+                          obscureText: true,
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Password',
+                          ),
+                          style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                          ),
+                          child: Text('Login',
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.deepPurple,
+                                ),
+                              )),
+                          onPressed: () {
+                            if (usernameController.text.isEmpty ||
+                                passwordController.text.isEmpty) {
+                              showAlertDialog(context, 'Error',
+                                  'Please fill all the fields');
+                            } else {
+                              authenticateClient(
+                                  context,
+                                  usernameController.text,
+                                  passwordController.text);
+                            }
+                          },
                         ),
-                        child: Text('Login',
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
-                            )),
-                        onPressed: () {
-                          if (usernameController.text.isEmpty ||
-                              passwordController.text.isEmpty) {
-                            showAlertDialog(
-                                context, 'Error', 'Please fill all the fields');
-                          } else {
-                            authenticateClient(context, usernameController.text,
-                                passwordController.text);
-                          }
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Center(
                   child: Column(
@@ -145,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               fontSize: 20,
-                              color: Colors.blue,
+                              color: Colors.deepPurple,
                             ),
                           ),
                         ),
